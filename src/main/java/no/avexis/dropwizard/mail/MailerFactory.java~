@@ -1,25 +1,17 @@
 package no.avexis.dropwizard.mail;
 
-import com.fasterxml.jackson.annotation.JsonProperty
 import com.google.common.base.Preconditions;
 import io.dropwizard.setup.Environment;
 import org.simplejavamail.mailer.Mailer;
 import org.simplejavamail.mailer.config.TransportStrategy;
 
 public class MailerFactory {
-    @JsonProperty
     private String host;
-    @JsonProperty
     private Integer port;
-    @JsonProperty
     private String username;
-    @JsonProperty
     private String password;
-    @JsonProperty
     private TransportStrategy transportStrategy;
-    @JsonProperty
     private String fromName;
-    @JsonProperty
     private String fromAddress;
 
     public MailerFactory() {
