@@ -1,8 +1,5 @@
 package no.avexis.dropwizard.mail;
 
-import org.simplejavamail.email.EmailBuilder;
-
-import javax.mail.Message;
 import javax.mail.Session;
 
 public class SSLMailerClient {
