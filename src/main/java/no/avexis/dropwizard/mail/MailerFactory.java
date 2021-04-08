@@ -57,7 +57,7 @@ public class MailerFactory {
 
         Session session = Session.getDefaultInstance(props, auth);
 
-        return new SSLMailerClient(session, fromName, fromName);
+        return new SSLMailerClient(session);
     }
 
     public SimpleMailerClient buildSimpleClient(final Environment environment, final String name) {
