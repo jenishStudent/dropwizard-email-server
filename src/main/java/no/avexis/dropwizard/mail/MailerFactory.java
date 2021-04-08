@@ -1,6 +1,6 @@
 package no.avexis.dropwizard.mail;
 
-import com.fasterxml.jackson.annotation.JsonProperty
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.common.base.Preconditions;
 import io.dropwizard.setup.Environment;
 import org.simplejavamail.mailer.Mailer;
