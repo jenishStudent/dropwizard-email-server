@@ -6,6 +6,11 @@ import io.dropwizard.setup.Environment;
 import org.simplejavamail.mailer.Mailer;
 import org.simplejavamail.mailer.config.TransportStrategy;
 
+import javax.mail.Authenticator;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import java.util.Properties;
+
 public class MailerFactory {
     @JsonProperty
     private String host;
@@ -32,6 +37,27 @@ public class MailerFactory {
         final Mailer mailer = new Mailer(host, port, username, password, transportStrategy);
         environment.healthChecks().register(name, new MailerHealthCheck(mailer));
         return mailer;
+    }
+
+    public SSLMailerClient buildSSLClient() {
+        Properties props = new Properties();
+        props.put("mail.smtp.host", "smtp.gmail.com"); //SMTP Host
+        props.put("mail.smtp.socketFactory.port", "465"); //SSL Port
+        props.put("mail.smtp.socketFactory.class",
+                "javax.net.ssl.SSLSocketFactory"); //SSL Factory Class
+        props.put("mail.smtp.auth", "true"); //Enabling SMTP Authentication
+        props.put("mail.smtp.port", "465"); //SMTP Port
+
+        Authenticator auth = new Authenticator() {
+            //override the getPasswordAuthentication method
+            protected javax.mail.PasswordAuthentication getPasswordAuthentication() {
+                return new PasswordAuthentication(fromAddress, password);
+            }
+        };
+
+        Session session = Session.getDefaultInstance(props, auth);
+
+        return new SSLMailerClient(session, fromName, fromName);
     }
 
     public SimpleMailerClient buildSimpleClient(final Environment environment, final String name) {

@@ -4,6 +4,10 @@ import org.simplejavamail.email.Email;
 import org.simplejavamail.email.EmailBuilder;
 import org.simplejavamail.mailer.Mailer;
 
+import java.net.Authenticator;
+import java.net.PasswordAuthentication;
+import java.util.Properties;
+
 public class SimpleMailerClient {
 
     private Mailer mailer;
@@ -19,6 +23,7 @@ public class SimpleMailerClient {
     public Mailer getMailer() {
         return this.mailer;
     }
+
 
     public void send(final Email email) {
         if (null == email.getFromRecipient()) {
